@@ -27,6 +27,7 @@ libraryDependencies ++= {
     "io.buildo"           %%  "ingredients-jsend" % "0.3",
     "io.buildo"           %%  "nozzle"          % "0.5.0",
     "io.spray"            %%  "spray-testkit"   % sprayV  % "test",
+    "io.spray"            %%  "spray-client"    % sprayV,
     "io.spray"            %%  "spray-json"      % "1.3.1",
     "org.scalatest"       %%  "scalatest"       % "2.2.0" % "test",
     "org.scalamock"       %%  "scalamock-scalatest-support" % "3.2" % "test",

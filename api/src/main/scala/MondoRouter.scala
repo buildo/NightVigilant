@@ -27,12 +27,12 @@ trait MondoRouterModule extends io.buildo.base.MonadicCtrlRouterModule
     (post & path("webhook") & entity(as[TransactionCreated])) (returns[Unit].ctrl(mondoController.webhook _)) ~
     (post & path("setBudget") & entity(as[SetBudgetBody])) (returns[Unit].ctrl(mondoController.setBudget _)) ~
     (post & path("setSpent") & entity(as[SetSpentBody])) (returns[Unit].ctrl(mondoController.setSpent _)) ~
-    (get & path("status")) (returns[Status].ctrl(mondoController.status _))
+    (get & path("status")) (returns[Status].ctrl(mondoController.status _)) ~
+    (get & path("lastTransaction")) (returns[LastTransaction].ctrl(mondoController.lastTransaction _))
       // (get & pathEnd & parameters('coolness.as[String], 'size.as[Int].?) /**
       //   get campings matching the requested coolness and size
       //   @param coolness how cool it is
       //   @param size the number of tents
-      // */) (returns[List[Mondo]].ctrl(campingController.getByCoolnessAndSize _))
       // (get & path(IntNumber) /**
       //   get a camping by id
       // */) (returns[Mondo].ctrl(campingController.getById _)) ~

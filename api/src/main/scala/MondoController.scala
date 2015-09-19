@@ -6,13 +6,32 @@ import scalaz._
 import Scalaz._
 import scalaz.EitherT._
 
+import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
 trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
+  class SprayClientSR(actorSystem: akka.actor.ActorSystem, mondoToken: String) {
+    import spray.http._
+    import spray.client.pipelining._
+    import spray.json._
+    import spray.httpx.SprayJsonSupport._
+
+    private implicit val system = actorSystem
+
+    //val pipeline: HttpRequest => Future[HttpResponse] = sendReceive
+    val pipeline: HttpRequest => Future[HttpResponse] = (
+      addHeader("Authorization", s"Bearer $mondoToken")
+      ~> sendReceive
+    )
+    val dispatcher = system.dispatcher
+  }
+
+  def actorSystem: akka.actor.ActorSystem
   object mondoController {
     implicit class IntCentPimp(a: Int) {
       def cents: Double = a.toDouble / 100
     }
+    val mondoToken: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5MEN5ekpXNkNLZWZxNngyeWYiLCJleHAiOjE0NDI2OTY2ODYsImlhdCI6MTQ0MjY3NTA4NiwianRpIjoidG9rXzAwMDA5MEV0dGFOZ1RPU0l4MU51NnIiLCJ1aSI6InVzZXJfMDAwMDh3Q0VaWEx0WVpYeWY3bUhjdiIsInYiOiIxIn0.GtUuQ8bpq_D6atBe_b3C9yoepDRjLUsilOmJKp-9Fj4"
     var token: Option[String] = Some("20c36901bdc728693cd9961b71a68c741bb0179802b9d82749fd06303a363474")
     var currentSpent: Double = 13.4
     var budget: Double = 100
@@ -20,6 +39,7 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
     val certificatePath = "/Users/utaal/Downloads/NV/aps_dev_credentials.p12"
     val certificatePassword = "nightvigilant"
     val sound = ""
+    var lastTxn: Option[String] = None
 
     private lazy val service = {
       import com.notnoop.apns._
@@ -39,6 +59,8 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
       println(txnCreated)
       import com.notnoop.apns._
       if (txnCreated.data.amount < 0) {
+        lastTxn = Some(txnCreated.data.id)
+        println(s"lastTxn $lastTxn")
         currentSpent -= txnCreated.data.amount.cents
         println(s"""
           amount: ${txnCreated.data.amount}
@@ -94,6 +116,23 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
     def status: FutureCtrlFlow[Status] = Status(
       spent = currentSpent,
       budget = budget).point[FutureCtrlFlow]
+
+    def lastTransaction: FutureCtrlFlow[LastTransaction] = {
+      import spray.http._
+      import spray.client.pipelining._
+      import spray.json._
+
+      val scsr = new SprayClientSR(actorSystem, mondoToken)
+
+      eitherT {
+        lastTxn.map { lt =>
+          val response: Future[HttpResponse] = scsr.pipeline(Get(s"https://api.getmondo.co.uk/transactions/$lt?expand[]=merchant"))
+          response.map (t => \/-(LastTransaction(t.entity.asString.parseJson))) : Future[CtrlFlow[LastTransaction]]
+        }.getOrElse {
+          Future.successful(-\/(CtrlError.NotFound)) : Future[CtrlFlow[LastTransaction]]
+        }
+      }
+    }
     // def getAll: FutureCtrlFlow[List[Mondo]] = List(
     //   Mondo("Le Marze", 15),
     //   Mondo("Sunset Mondo", 22)).point[FutureCtrlFlow]
