@@ -33,7 +33,7 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
     }
     val mondoToken: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5MEN5ekpXNkNLZWZxNngyeWYiLCJleHAiOjE0NDI2OTY2ODYsImlhdCI6MTQ0MjY3NTA4NiwianRpIjoidG9rXzAwMDA5MEV0dGFOZ1RPU0l4MU51NnIiLCJ1aSI6InVzZXJfMDAwMDh3Q0VaWEx0WVpYeWY3bUhjdiIsInYiOiIxIn0.GtUuQ8bpq_D6atBe_b3C9yoepDRjLUsilOmJKp-9Fj4"
     var token: Option[String] = Some("20c36901bdc728693cd9961b71a68c741bb0179802b9d82749fd06303a363474")
-    var currentSpent: Double = 13.4
+    var currentSpent: Double = 0
     var budget: Double = 100
 
     val certificatePath = "/Users/utaal/Downloads/NV/aps_dev_credentials.p12"
@@ -115,7 +115,8 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
 
     def status: FutureCtrlFlow[Status] = Status(
       spent = currentSpent,
-      budget = budget).point[FutureCtrlFlow]
+      budget = budget,
+      remaining = budget - currentSpent).point[FutureCtrlFlow]
 
     def lastTransaction: FutureCtrlFlow[LastTransaction] = {
       import spray.http._
