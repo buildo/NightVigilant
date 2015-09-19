@@ -51,7 +51,7 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
           .customField("spent", currentSpent)
           .customField("remaining", budget - currentSpent)
           .customField("budget", budget)
-          .alertBody(s"Transaction! ${txnCreated.data.amount}")
+          .alertBody(s"You have £${budget - currentSpent} remaining")
           //.sound(sound)
           .build()
         token.map { t =>
