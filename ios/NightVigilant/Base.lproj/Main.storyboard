@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NightVigilant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tr0-me-r71" customClass="Gauge" customModule="GaugeKit">
+                                <rect key="frame" x="124" y="165" width="352" height="270"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="270" id="CaX-eO-eht"/>
+                                    <constraint firstAttribute="width" constant="352" id="wjD-GP-ock"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.0" green="0.47189387186905662" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.59404930711717308" green="1" blue="0.68151275346203533" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rate">
+                                        <real key="value" value="60"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rotate">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wvp-AF-FV0">
+                                <rect key="frame" x="165" y="491" width="270" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="266" id="5oN-DS-Tcq"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="iYP-1B-Qam"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="42£" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqL-UC-lRq">
+                                <rect key="frame" x="230" y="207" width="141" height="127"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Awl-YG-JAF">
+                                <rect key="frame" x="200.5" y="65" width="200" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="mGX-Eb-tNK"/>
+                                    <constraint firstAttribute="height" constant="60" id="qX1-Zs-7rK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="goalChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="944-9Q-KhY"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="6ep-HJ-pOn"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="spent tonight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkK-AR-DSL">
+                                <rect key="frame" x="249" y="342" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rkK-AR-DSL" firstAttribute="top" secondItem="MqL-UC-lRq" secondAttribute="bottom" id="595-Z5-Tgi"/>
+                            <constraint firstItem="rkK-AR-DSL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5jx-ZM-NMZ"/>
+                            <constraint firstItem="tr0-me-r71" firstAttribute="top" secondItem="Awl-YG-JAF" secondAttribute="bottom" constant="40" id="6o4-Ah-mvs"/>
+                            <constraint firstItem="MqL-UC-lRq" firstAttribute="centerX" secondItem="tr0-me-r71" secondAttribute="centerX" id="900-Rf-Hrl"/>
+                            <constraint firstItem="Wvp-AF-FV0" firstAttribute="top" secondItem="tr0-me-r71" secondAttribute="bottom" constant="56" id="ChB-uL-LgH"/>
+                            <constraint firstItem="Wvp-AF-FV0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KAu-ej-J8h"/>
+                            <constraint firstItem="Awl-YG-JAF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kcj-hX-TLY"/>
+                            <constraint firstItem="tr0-me-r71" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NqW-1o-jCK"/>
+                            <constraint firstItem="MqL-UC-lRq" firstAttribute="centerY" secondItem="tr0-me-r71" secondAttribute="centerY" id="W7k-l3-Orz"/>
+                            <constraint firstItem="tr0-me-r71" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XZ4-MS-USl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gauge" destination="tr0-me-r71" id="eCB-Tk-aui"/>
+                        <outlet property="slider" destination="Wvp-AF-FV0" id="NGI-VM-twr"/>
+                        <outlet property="spentLabel" destination="MqL-UC-lRq" id="PBa-Ps-V5R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="588" y="208"/>
+        </scene>
+    </scenes>
+</document>

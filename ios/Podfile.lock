@@ -1,0 +1,31 @@
+PODS:
+  - Alamofire (2.0.1)
+  - Cartography (0.6.0)
+  - GaugeKit (0.3.0)
+  - ReactiveCocoa (4.0.2-alpha-1):
+    - ReactiveCocoa/UI (= 4.0.2-alpha-1)
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/Core (4.0.2-alpha-1):
+    - ReactiveCocoa/no-arc
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/no-arc (4.0.2-alpha-1):
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/UI (4.0.2-alpha-1):
+    - ReactiveCocoa/Core
+    - Result (~> 0.6-beta.1)
+  - Result (0.6-beta.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - Cartography
+  - GaugeKit
+  - ReactiveCocoa (= 4.0.2-alpha-1)
+
+SPEC CHECKSUMS:
+  Alamofire: 1d8e208d616fbbfd2391b15eae766d07c96cdc49
+  Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
+  GaugeKit: 73e6923434aa710079552a415c5c2e0adad13653
+  ReactiveCocoa: 652cf90e5de65708e7e2111f77405756da21aabe
+  Result: af24e3e57ab81005ec4221a53fd36dc1e7a52869
+
+COCOAPODS: 0.38.2
