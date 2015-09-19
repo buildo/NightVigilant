@@ -14,6 +14,7 @@
 		6AAC5C851BAD735B000B82E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AAC5C831BAD735B000B82E2 /* LaunchScreen.storyboard */; };
 		6AAC5C8D1BAD785D000B82E2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC5C8C1BAD785D000B82E2 /* API.swift */; };
 		6AAC5C8F1BAD7C6E000B82E2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC5C8E1BAD7C6E000B82E2 /* Router.swift */; };
+		6AAC5C911BADA6EA000B82E2 /* brewswayneagain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6AAC5C901BADA6EA000B82E2 /* brewswayneagain.jpg */; };
 		C97FFE8329E93A4304BB9EED /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B256FBFA8D9628582389D977 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		6AAC5C861BAD735B000B82E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AAC5C8C1BAD785D000B82E2 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		6AAC5C8E1BAD7C6E000B82E2 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		6AAC5C901BADA6EA000B82E2 /* brewswayneagain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = brewswayneagain.jpg; sourceTree = "<group>"; };
 		B256FBFA8D9628582389D977 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 				6AAC5C7E1BAD735B000B82E2 /* Main.storyboard */,
 				6AAC5C811BAD735B000B82E2 /* Assets.xcassets */,
 				6AAC5C831BAD735B000B82E2 /* LaunchScreen.storyboard */,
+				6AAC5C901BADA6EA000B82E2 /* brewswayneagain.jpg */,
 				6AAC5C861BAD735B000B82E2 /* Info.plist */,
 			);
 			path = NightVigilant;
@@ -128,6 +131,12 @@
 				TargetAttributes = {
 					6AAC5C761BAD735B000B82E2 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 9H28W54MJE;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -155,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AAC5C851BAD735B000B82E2 /* LaunchScreen.storyboard in Resources */,
+				6AAC5C911BADA6EA000B82E2 /* brewswayneagain.jpg in Resources */,
 				6AAC5C821BAD735B000B82E2 /* Assets.xcassets in Resources */,
 				6AAC5C801BAD735B000B82E2 /* Main.storyboard in Resources */,
 			);
@@ -330,10 +340,13 @@
 			baseConfigurationReference = 604996D32D161C8C8D33BA25 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NightVigilant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.buildo.nightvigilant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -342,10 +355,13 @@
 			baseConfigurationReference = 0AD2A8A037FD6E82D7F9BE2D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NightVigilant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.buildo.nightvigilant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

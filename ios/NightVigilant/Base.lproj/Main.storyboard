@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -34,16 +35,16 @@
                                         <real key="value" value="100"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="2"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="6"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
                                         <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
-                                        <real key="value" value="14"/>
+                                        <real key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rate">
                                         <real key="value" value="60"/>
@@ -54,36 +55,56 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wvp-AF-FV0">
-                                <rect key="frame" x="165" y="491" width="270" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42£" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="MqL-UC-lRq">
+                                <rect key="frame" x="210" y="252" width="180" height="72"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="266" id="5oN-DS-Tcq"/>
+                                    <constraint firstAttribute="width" constant="180" id="0Tv-fU-BRb"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="iYP-1B-Qam"/>
-                                </connections>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="42£" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqL-UC-lRq">
-                                <rect key="frame" x="230" y="207" width="141" height="127"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Awl-YG-JAF">
-                                <rect key="frame" x="200.5" y="65" width="200" height="60"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="how many ££?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Awl-YG-JAF">
+                                <rect key="frame" x="200" y="65" width="200" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="mGX-Eb-tNK"/>
                                     <constraint firstAttribute="height" constant="60" id="qX1-Zs-7rK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="goalChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="944-9Q-KhY"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="6ep-HJ-pOn"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="spent tonight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkK-AR-DSL">
-                                <rect key="frame" x="249" y="342" width="102" height="21"/>
+                                <rect key="frame" x="249" y="321" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set your goal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJS-io-Uo5">
+                                <rect key="frame" x="250" y="36" width="101" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-iW-uHS">
+                                <rect key="frame" x="97" y="509" width="405.5" height="48"/>
+                                <string key="text">CARD LOCKED
+NO MORE BEERS FOR YOU TONIGHT, SON</string>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.11998722730612776" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last expense" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ov4-Fk-e6i">
+                                <rect key="frame" x="36" y="443" width="528" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(8 remaining)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqS-cC-Zce">
+                                <rect key="frame" x="248" y="344" width="102" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -94,18 +115,30 @@
                             <constraint firstItem="rkK-AR-DSL" firstAttribute="top" secondItem="MqL-UC-lRq" secondAttribute="bottom" id="595-Z5-Tgi"/>
                             <constraint firstItem="rkK-AR-DSL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5jx-ZM-NMZ"/>
                             <constraint firstItem="tr0-me-r71" firstAttribute="top" secondItem="Awl-YG-JAF" secondAttribute="bottom" constant="40" id="6o4-Ah-mvs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ov4-Fk-e6i" secondAttribute="trailing" constant="16" id="6zk-IO-iHY"/>
                             <constraint firstItem="MqL-UC-lRq" firstAttribute="centerX" secondItem="tr0-me-r71" secondAttribute="centerX" id="900-Rf-Hrl"/>
-                            <constraint firstItem="Wvp-AF-FV0" firstAttribute="top" secondItem="tr0-me-r71" secondAttribute="bottom" constant="56" id="ChB-uL-LgH"/>
-                            <constraint firstItem="Wvp-AF-FV0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KAu-ej-J8h"/>
+                            <constraint firstItem="nqS-cC-Zce" firstAttribute="top" secondItem="rkK-AR-DSL" secondAttribute="bottom" constant="1" id="H7H-DT-OPg"/>
+                            <constraint firstItem="Ljx-iW-uHS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hne-IZ-Ki1"/>
+                            <constraint firstItem="Ov4-Fk-e6i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="Jjd-B6-wdX"/>
                             <constraint firstItem="Awl-YG-JAF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kcj-hX-TLY"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Ljx-iW-uHS" secondAttribute="trailing" constant="16" id="MxF-fU-2SQ"/>
                             <constraint firstItem="tr0-me-r71" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NqW-1o-jCK"/>
-                            <constraint firstItem="MqL-UC-lRq" firstAttribute="centerY" secondItem="tr0-me-r71" secondAttribute="centerY" id="W7k-l3-Orz"/>
+                            <constraint firstItem="Ljx-iW-uHS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="UUL-qe-ndM"/>
+                            <constraint firstItem="MqL-UC-lRq" firstAttribute="centerY" secondItem="tr0-me-r71" secondAttribute="centerY" constant="-12" id="W7k-l3-Orz"/>
                             <constraint firstItem="tr0-me-r71" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XZ4-MS-USl"/>
+                            <constraint firstItem="LJS-io-Uo5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bEc-8P-JE7"/>
+                            <constraint firstItem="nqS-cC-Zce" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hhZ-oZ-js8"/>
+                            <constraint firstItem="Ljx-iW-uHS" firstAttribute="top" secondItem="tr0-me-r71" secondAttribute="bottom" constant="75" id="oKn-rP-kje"/>
+                            <constraint firstItem="Ov4-Fk-e6i" firstAttribute="top" secondItem="tr0-me-r71" secondAttribute="bottom" constant="8" id="pgb-G7-X9I"/>
+                            <constraint firstItem="Awl-YG-JAF" firstAttribute="top" secondItem="LJS-io-Uo5" secondAttribute="bottom" constant="8" id="s4V-IJ-5gn"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="budgetTextView" destination="Awl-YG-JAF" id="mNP-V3-L3t"/>
+                        <outlet property="cardLockedMessage" destination="Ljx-iW-uHS" id="noN-Yj-WMx"/>
                         <outlet property="gauge" destination="tr0-me-r71" id="eCB-Tk-aui"/>
-                        <outlet property="slider" destination="Wvp-AF-FV0" id="NGI-VM-twr"/>
+                        <outlet property="lastExpenseLabel" destination="Ov4-Fk-e6i" id="DH7-Xo-Drl"/>
+                        <outlet property="remainingLabel" destination="nqS-cC-Zce" id="aLv-NE-PSB"/>
                         <outlet property="spentLabel" destination="MqL-UC-lRq" id="PBa-Ps-V5R"/>
                     </connections>
                 </viewController>

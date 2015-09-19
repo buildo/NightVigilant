@@ -13,12 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    
-    API.transactions().startWithNext { next in
-      print(next)
-    }
     
     let settings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories: nil)
     UIApplication.sharedApplication().registerUserNotificationSettings(settings)
@@ -38,6 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     print(deviceToken.description)
     print("Registered for remote notifications with device token: \(tokenString)")
     API.registerNotificationToken(tokenString).start()
+  }
+  
+  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    NSNotificationCenter.defaultCenter().postNotificationName("Transaction", object: nil, userInfo: userInfo)
   }
   
 }

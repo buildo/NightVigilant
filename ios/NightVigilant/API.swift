@@ -20,6 +20,24 @@ class API {
     return request(.POST, "https://4c28a52a.ngrok.io/register", parameters: ["token": token], encoding: .JSON).rac_responseJSON()
   }
   
+  class func setBudget(budget: Float) -> SignalProducer<[String: AnyObject], NSError> {
+    return request(.POST, "https://4c28a52a.ngrok.io/setBudget", parameters: ["budget": budget], encoding: .JSON).rac_responseJSON()
+  }
+  
+  class func getStatus() -> SignalProducer<[String: AnyObject], NSError> {
+    return request(.GET, "https://4c28a52a.ngrok.io/status", parameters: nil, encoding: .JSON).rac_responseJSON().map { ($0["data"]!["status"] as! [String : AnyObject]) }
+  }
+  
+  class func getLastTransation() -> SignalProducer<[String: AnyObject], NSError> {
+    return request(.GET, "https://4c28a52a.ngrok.io/lastTransaction", parameters: nil, encoding: .JSON).rac_responseJSON()
+    .map { response in
+      if let data = response["data"] as? [String: [String: [String: [String: AnyObject]]]] {
+        return data["lastTransaction"]!["data"]!["transaction"]!
+      } else {
+        return [:]
+      }
+    }
+  }
 }
 
 extension Request {
