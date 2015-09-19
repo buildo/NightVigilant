@@ -18,5 +18,8 @@ trait JsonSerializerModule extends io.buildo.base.MonadicCtrlJsonModule
     implicit val TransactionDataSerializationInfo = `for`[TransactionData]
     implicit val TransactionCreatedSerializationInfo = `for`[TransactionCreated]
     implicit val RegisterTokenBodySerializationInfo = `for`[RegisterTokenBody]
+    implicit val SetBudgetBodySerializationInfo = `for`[SetBudgetBody]
+    implicit val SetSpentBodySerializationInfo = `for`[SetSpentBody]
+    implicit val StatusSerializationInfo = `for`[Status] serializeOneAs("status")
   }
 }

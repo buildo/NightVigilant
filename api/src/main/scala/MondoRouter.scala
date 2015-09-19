@@ -24,7 +24,10 @@ trait MondoRouterModule extends io.buildo.base.MonadicCtrlRouterModule
   @publishroute
   val mondoRoute = {
     (post & path("register") & entity(as[RegisterTokenBody])) (returns[Unit].ctrl(mondoController.registerToken _)) ~
-    (post & path("webhook") & entity(as[TransactionCreated])) (returns[Unit].ctrl(mondoController.webhook _))
+    (post & path("webhook") & entity(as[TransactionCreated])) (returns[Unit].ctrl(mondoController.webhook _)) ~
+    (post & path("setBudget") & entity(as[SetBudgetBody])) (returns[Unit].ctrl(mondoController.setBudget _)) ~
+    (post & path("setSpent") & entity(as[SetSpentBody])) (returns[Unit].ctrl(mondoController.setSpent _)) ~
+    (get & path("status")) (returns[Status].ctrl(mondoController.status _))
       // (get & pathEnd & parameters('coolness.as[String], 'size.as[Int].?) /**
       //   get campings matching the requested coolness and size
       //   @param coolness how cool it is

@@ -10,7 +10,12 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
   object mondoController {
-    var token: Option[String] = Some("519b3f259c1147b6873053a6042a7ecdedfc368c5bee33b06a2d2f6ae06a7e4f")
+    implicit class IntCentPimp(a: Int) {
+      def cents: Double = a.toDouble / 100
+    }
+    var token: Option[String] = Some("20c36901bdc728693cd9961b71a68c741bb0179802b9d82749fd06303a363474")
+    var currentSpent: Double = 13.4
+    var budget: Double = 100
 
     val certificatePath = "/Users/utaal/Downloads/NV/aps_dev_credentials.p12"
     val certificatePassword = "nightvigilant"
@@ -33,20 +38,32 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
     def webhook(txnCreated: TransactionCreated): FutureCtrlFlow[Unit] = {
       println(txnCreated)
       import com.notnoop.apns._
-      val notif = APNS.newPayload()
-        .customField("amount", txnCreated.data.amount)
-        .alertBody(s"Transaction! ${txnCreated.data.amount}")
-        //.sound(sound)
-        .build()
-      token.map { t =>
-        try {
-          println(s"TOKEN: $t")
-          service.push(t, notif)
-        } catch {
-          case e: Throwable => e.printStackTrace
+      if (txnCreated.data.amount < 0) {
+        currentSpent -= txnCreated.data.amount.cents
+        println(s"""
+          amount: ${txnCreated.data.amount}
+          spent: ${currentSpent}
+          remaining: ${budget - currentSpent}
+          budget: ${budget}
+        """)
+        val notif = APNS.newPayload()
+          .customField("amount", txnCreated.data.amount)
+          .customField("spent", currentSpent)
+          .customField("remaining", budget - currentSpent)
+          .customField("budget", budget)
+          .alertBody(s"Transaction! ${txnCreated.data.amount}")
+          //.sound(sound)
+          .build()
+        token.map { t =>
+          try {
+            println(s"TOKEN: $t")
+            service.push(t, notif)
+          } catch {
+            case e: Throwable => e.printStackTrace
+          }
+        }.getOrElse {
+          println("no token")
         }
-      }.getOrElse {
-        println("no token")
       }
       ()
     }.point[FutureCtrlFlow]
@@ -56,6 +73,27 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
       token = Some(tokenBody.token)
       ()
     }.point[FutureCtrlFlow]
+
+    def setBudget(setBudget: SetBudgetBody): FutureCtrlFlow[Unit] = {
+      println(s"Set budget: ${setBudget.budget}")
+      budget = setBudget.budget
+      ()
+    }.point[FutureCtrlFlow]
+
+    def setSpent(setSpent: SetSpentBody): FutureCtrlFlow[Unit] = {
+      println(s"Set spent: ${setSpent.spent}")
+      println(s"""
+        spent: ${currentSpent}
+        remaining: ${budget - currentSpent}
+        budget: ${budget}
+      """)
+      currentSpent = setSpent.spent
+      ()
+    }.point[FutureCtrlFlow]
+
+    def status: FutureCtrlFlow[Status] = Status(
+      spent = currentSpent,
+      budget = budget).point[FutureCtrlFlow]
     // def getAll: FutureCtrlFlow[List[Mondo]] = List(
     //   Mondo("Le Marze", 15),
     //   Mondo("Sunset Mondo", 22)).point[FutureCtrlFlow]
@@ -65,8 +103,7 @@ trait MondoControllerModule extends io.buildo.base.MonadicCtrlModule {
     //   Mondo("Sunset Mondo", 22)).point[FutureCtrlFlow]
 
     // def getById(id: Int): FutureCtrlFlow[Mondo] = 
-    //   Mondo("Le Marze", 15).point[FutureCtrlFlow]
-
+    //   Mondo("Le Marze", 15).point[FutureCtrlFlow] 
     // def create(camping: Mondo): FutureCtrlFlow[Mondo] =
     //   camping.point[FutureCtrlFlow]
 
